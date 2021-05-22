@@ -1,5 +1,5 @@
 package store.services;
 
-public class User {
+public class UserService {
 
 }
