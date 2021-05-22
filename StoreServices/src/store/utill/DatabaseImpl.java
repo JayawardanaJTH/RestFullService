@@ -65,7 +65,7 @@ public class DatabaseImpl implements IDatabase {
 			node.appendChild(user);
 
 			try {
-				File inputFile = new File(Constant.XML_FILE_NAME);
+				File inputFile = new File(System.getProperty("catalina.base") + Constant.XML_FILE_NAME);
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
 				transformer.setOutputProperty(OutputKeys.METHOD, "xml");
@@ -110,7 +110,7 @@ public class DatabaseImpl implements IDatabase {
 			node.appendChild(item);
 
 			try {
-				File inputFile = new File(Constant.XML_FILE_NAME);
+				File inputFile = new File(System.getProperty("catalina.base") + Constant.XML_FILE_NAME);
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
 				transformer.setOutputProperty(OutputKeys.METHOD, "xml");

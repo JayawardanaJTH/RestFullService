@@ -2,7 +2,7 @@ package store.utill;
 
 public class Constant {
 
-	public static final String XML_FILE_NAME = "dataSource.xml";
+	public static final String XML_FILE_NAME = "\\wtpwebapps\\StoreServices\\WEB-INF\\dataSource.xml";
 	public static final String USER_TYPE_ROOT = "users";
 	public static final String ITEM_TYPE_ROOT = "items";
 	public static final String USER_TYPE_NODE = "user";
