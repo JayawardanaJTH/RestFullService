@@ -15,7 +15,7 @@ public class ReadFile {
 		
 		if(doc == null) {
 			try {
-				File inputFile = new File("dataSource.xml");
+				File inputFile = new File(Constant.XML_FILE_NAME);
 				DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();
 				doc = documentBuilder.parse(inputFile);
