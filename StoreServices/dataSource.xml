@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone = "no"?>
-<store>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><store>
 	<users id="1">
 		<user>
 			<id>1</id>
@@ -9,7 +8,7 @@
 			<password>12345</password>
 			<type>user</type>
 		</user>
-	</users>
+	<user><id>2</id><name>Harsha</name><email>tiran2323</email><contact>1234</contact><password>asdf</password><type>Seller</type></user></users>
 	
 	<items id="1">
 		<item>
@@ -18,5 +17,5 @@
 			<desc>This is first item</desc>
 			<price>200.00</price>
 		</item>
-	</items>
+	<item><id>2</id><name>item2</name><desc>this is 2</desc><price>300.5</price></item></items>
 </store>
