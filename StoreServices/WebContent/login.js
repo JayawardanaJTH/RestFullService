@@ -1,7 +1,6 @@
 /**
  * login  functon
  */
-
 $(document).on("click", "#login", function(event) {
 
 	$("#alertSuccess").text("");
@@ -17,21 +16,10 @@ $(document).on("click", "#login", function(event) {
 		return;
 	}
 
-	var username = $("#uName").vai().trim();
-	var password = $("#password").vai().trim();
-	
+	var username = $("#uName").val().trim();
+	var password = $("#password").val().trim();
 	$.ajax({
-		xhrFields: {
-		        withCredentials: true
-		    },
-	    beforeSend: function (xhr) {
-	        	xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username+":"+password));
-	    	},
-		url: "http://localhost:8080/StoreServices/rest/UserService"
-	}).then(function(data, status, jqxhr) {
-      
-       console.log(data.id);
-    });
+		});
 
 });
 
