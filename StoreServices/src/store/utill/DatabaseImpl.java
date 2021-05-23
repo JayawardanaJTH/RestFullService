@@ -256,18 +256,21 @@ public class DatabaseImpl implements IDatabase {
 			
 		}else if (type.contentEquals(Constant.ITEM_TYPE_ROOT)) {
 			
-			Node node = doc.getElementsByTagName(Constant.ITEM_TYPE_NODE).item(0);
-			
-			NodeList nodeList = node.getChildNodes();
+			NodeList nodeList = doc.getElementsByTagName(Constant.ITEM_TYPE_NODE);
 			Element element = null;
+			Node node = doc.getFirstChild();
 			Item item = new Item();
+			
+			NodeList nodeList2 = node.getChildNodes();
 
 			for (int value = 0; value < nodeList.getLength(); value++) {
 				element = (Element) nodeList.item(value);
 
 				if (Integer.parseInt(element.getElementsByTagName(Constant.ITEM_ID).item(0).getTextContent()) == id) {
 
-					node.removeChild(element);
+					Node node2 = nodeList2.item(value);
+					
+					node.removeChild(node2);
 					
 					File inputFile = new File(System.getProperty("catalina.base") + Constant.XML_FILE_NAME);
 					TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -282,12 +285,14 @@ public class DatabaseImpl implements IDatabase {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
 					break;
+					
 				}
 
 			}
 		}
-		return false;
+		return true;
 	}
 
 }

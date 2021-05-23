@@ -40,16 +40,16 @@ public class ItemService {
 
 	}
 	
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public String insertitem(@FormParam("item_category") String item_category, @FormParam("item_name") String item_name,
-			@FormParam("item_des") String item_des, @FormParam("price") String price, @FormParam("date") String date) {
-
-		String output = itemObjt.insertitem(item_category, item_name, item_des, price, date);
-		return output;
-
-	}
+//	@POST
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String insertitem(@FormParam("item_category") String item_category, @FormParam("item_name") String item_name,
+//			@FormParam("item_des") String item_des, @FormParam("price") String price, @FormParam("date") String date) {
+//
+//		String output = itemObjt.insertitem(item_category, item_name, item_des, price, date);
+//		return output;
+//
+//	}
 
 	@PUT
 	@Path("/")
@@ -121,7 +121,7 @@ public class ItemService {
 		return list;
 	}
 	
-	@GET
+	@DELETE
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
