@@ -11,4 +11,5 @@ public interface IDatabase {
 	public <T> ArrayList<T> getAllData(String type);
 	public Item getItem(int id);
 	public User getUser(String username, String password);
+	public boolean deleteData(String type, int id);
 }

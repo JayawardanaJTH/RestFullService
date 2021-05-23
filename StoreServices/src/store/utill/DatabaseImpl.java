@@ -7,6 +7,7 @@ import javax.ws.rs.NotFoundException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -245,6 +246,48 @@ public class DatabaseImpl implements IDatabase {
 
 			return user;
 		}
+	}
+
+	@Override
+	public boolean deleteData(String type, int id) {
+		Document doc = ReadFile.getFile();
+
+		if (type.contentEquals(Constant.USER_TYPE_ROOT)) {
+			
+		}else if (type.contentEquals(Constant.ITEM_TYPE_ROOT)) {
+			
+			Node node = doc.getElementsByTagName(Constant.ITEM_TYPE_NODE).item(0);
+			
+			NodeList nodeList = node.getChildNodes();
+			Element element = null;
+			Item item = new Item();
+
+			for (int value = 0; value < nodeList.getLength(); value++) {
+				element = (Element) nodeList.item(value);
+
+				if (Integer.parseInt(element.getElementsByTagName(Constant.ITEM_ID).item(0).getTextContent()) == id) {
+
+					node.removeChild(element);
+					
+					File inputFile = new File(System.getProperty("catalina.base") + Constant.XML_FILE_NAME);
+					TransformerFactory transformerFactory = TransformerFactory.newInstance();
+					Transformer transformer;
+					try {
+						transformer = transformerFactory.newTransformer();
+						transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+						DOMSource source = new DOMSource(doc);
+						Result result = new StreamResult(inputFile);
+						transformer.transform(source, result);
+					} catch (TransformerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+				}
+
+			}
+		}
+		return false;
 	}
 
 }
