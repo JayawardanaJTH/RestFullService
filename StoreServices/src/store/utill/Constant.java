@@ -7,6 +7,9 @@ public class Constant {
 	public static final String PROPERTY_FILE = "properties.properties";
 	public static final String PROPERTY_SENDER_EMAIL = "senderEmail";
 	public static final String PROPERTY_SENDER_EMAIL_PASSWORD = "emailPassword";
+	public static final String PROPERTY_ACCOUNT_SID = "ACCOUNT_SID";
+	public static final String PROPERTY_AUTH_TOKEN = "AUTH_TOKEN";
+	public static final String PROPERTY_SMS_SECRET_KEY = "SECRET_KEY";
 	
 	public static final String USER_TYPE_ROOT = "users";
 	public static final String ITEM_TYPE_ROOT = "items";

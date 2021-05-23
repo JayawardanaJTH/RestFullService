@@ -10,8 +10,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.twilio.rest.preview.wireless.Command;
-
 import store.model.User;
 import store.utill.Common;
 import store.utill.Constant;
