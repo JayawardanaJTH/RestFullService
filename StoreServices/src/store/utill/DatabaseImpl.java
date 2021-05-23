@@ -28,44 +28,43 @@ public class DatabaseImpl implements IDatabase {
 		Document doc = ReadFile.getFile();
 
 		if (type.contentEquals(Constant.USER_TYPE_ROOT)) {
-
-			User userObj = (User) data;
-
-			Node node = doc.getElementsByTagName(type).item(0);
-			NamedNodeMap attr = node.getAttributes();
-			Node nodeAttr = attr.getNamedItem("id");
-
-			int userID = Integer.parseInt(nodeAttr.getTextContent());
-			userID++;
-
-			System.out.println(userID);
-
-			Element user = doc.createElement(Constant.USER_TYPE_NODE);
-
-			Element userid = doc.createElement(Constant.USER_ID);
-			Element username = doc.createElement(Constant.USER_NAME);
-			Element useremail = doc.createElement(Constant.USER_EMAIL);
-			Element usercontact = doc.createElement(Constant.USER_CONTACT);
-			Element userpassword = doc.createElement(Constant.USER_PASSWORD);
-			Element usertype = doc.createElement(Constant.USER_TYPE);
-
-			userid.setTextContent(Integer.toString(userID));
-			username.setTextContent(userObj.getUserName());
-			useremail.setTextContent(userObj.getEmail());
-			usercontact.setTextContent(Integer.toString(userObj.getContact()));
-			userpassword.setTextContent(userObj.getPassword());
-			usertype.setTextContent(userObj.getType());
-
-			user.appendChild(userid);
-			user.appendChild(username);
-			user.appendChild(useremail);
-			user.appendChild(usercontact);
-			user.appendChild(userpassword);
-			user.appendChild(usertype);
-
-			node.appendChild(user);
-
 			try {
+				User userObj = (User) data;
+
+				Node node = doc.getElementsByTagName(type).item(0);
+				NamedNodeMap attr = node.getAttributes();
+				Node nodeAttr = attr.getNamedItem("id");
+
+				int userID = Integer.parseInt(nodeAttr.getTextContent());
+				userID++;
+
+				nodeAttr.setTextContent(Integer.toString(userID));
+
+				Element user = doc.createElement(Constant.USER_TYPE_NODE);
+
+				Element userid = doc.createElement(Constant.USER_ID);
+				Element username = doc.createElement(Constant.USER_NAME);
+				Element useremail = doc.createElement(Constant.USER_EMAIL);
+				Element usercontact = doc.createElement(Constant.USER_CONTACT);
+				Element userpassword = doc.createElement(Constant.USER_PASSWORD);
+				Element usertype = doc.createElement(Constant.USER_TYPE);
+
+				userid.setTextContent(Integer.toString(userID));
+				username.setTextContent(userObj.getUserName());
+				useremail.setTextContent(userObj.getEmail());
+				usercontact.setTextContent(Integer.toString(userObj.getContact()));
+				userpassword.setTextContent(userObj.getPassword());
+				usertype.setTextContent(userObj.getType());
+
+				user.appendChild(userid);
+				user.appendChild(username);
+				user.appendChild(useremail);
+				user.appendChild(usercontact);
+				user.appendChild(userpassword);
+				user.appendChild(usertype);
+
+				node.appendChild(user);
+
 				File inputFile = new File(System.getProperty("catalina.base") + Constant.XML_FILE_NAME);
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
@@ -79,38 +78,37 @@ public class DatabaseImpl implements IDatabase {
 				throw new NotFoundException();
 			}
 		} else if (type.contentEquals(Constant.ITEM_TYPE_ROOT)) {
-
-			Item itemObj = (Item) data;
-
-			Node node = doc.getElementsByTagName(type).item(0);
-			NamedNodeMap attr = node.getAttributes();
-			Node nodeAttr = attr.getNamedItem("id");
-
-			int itemID = Integer.parseInt(nodeAttr.getTextContent());
-			itemID++;
-
-			System.out.println(itemID);
-
-			Element item = doc.createElement(Constant.ITEM_TYPE_NODE);
-
-			Element itemid = doc.createElement(Constant.ITEM_ID);
-			Element itemname = doc.createElement(Constant.ITEM_NAME);
-			Element itemdesc = doc.createElement(Constant.ITEM_DESC);
-			Element itemprice = doc.createElement(Constant.ITEM_PRICE);
-
-			itemid.setTextContent(Integer.toString(itemID));
-			itemname.setTextContent(itemObj.getName());
-			itemdesc.setTextContent(itemObj.getDesc());
-			itemprice.setTextContent(Double.toString(itemObj.getPrice()));
-
-			item.appendChild(itemid);
-			item.appendChild(itemname);
-			item.appendChild(itemdesc);
-			item.appendChild(itemprice);
-
-			node.appendChild(item);
-
 			try {
+				Item itemObj = (Item) data;
+
+				Node node = doc.getElementsByTagName(type).item(0);
+				NamedNodeMap attr = node.getAttributes();
+				Node nodeAttr = attr.getNamedItem("id");
+
+				int itemID = Integer.parseInt(nodeAttr.getTextContent());
+				itemID++;
+
+				System.out.println(itemID);
+
+				Element item = doc.createElement(Constant.ITEM_TYPE_NODE);
+
+				Element itemid = doc.createElement(Constant.ITEM_ID);
+				Element itemname = doc.createElement(Constant.ITEM_NAME);
+				Element itemdesc = doc.createElement(Constant.ITEM_DESC);
+				Element itemprice = doc.createElement(Constant.ITEM_PRICE);
+
+				itemid.setTextContent(Integer.toString(itemID));
+				itemname.setTextContent(itemObj.getName());
+				itemdesc.setTextContent(itemObj.getDesc());
+				itemprice.setTextContent(Double.toString(itemObj.getPrice()));
+
+				item.appendChild(itemid);
+				item.appendChild(itemname);
+				item.appendChild(itemdesc);
+				item.appendChild(itemprice);
+
+				node.appendChild(item);
+
 				File inputFile = new File(System.getProperty("catalina.base") + Constant.XML_FILE_NAME);
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
@@ -177,7 +175,7 @@ public class DatabaseImpl implements IDatabase {
 			}
 			return (ArrayList<T>) arrayList;
 		} else {
-			
+
 		}
 
 		throw new NotFoundException();
@@ -223,24 +221,26 @@ public class DatabaseImpl implements IDatabase {
 			element = (Element) nodeList.item(value);
 
 			if (element.getElementsByTagName(Constant.USER_NAME).item(0).getTextContent().trim().contentEquals(username)
-					&& element.getElementsByTagName(Constant.USER_PASSWORD).item(0).getTextContent().trim().contentEquals(password)) {
-				
+					&& element.getElementsByTagName(Constant.USER_PASSWORD).item(0).getTextContent().trim()
+							.contentEquals(password)) {
+
 				user = new User();
 				user.setId(Integer.parseInt(element.getElementsByTagName(Constant.USER_ID).item(0).getTextContent()));
 				user.setUserName(element.getElementsByTagName(Constant.USER_NAME).item(0).getTextContent());
 				user.setEmail(element.getElementsByTagName(Constant.USER_EMAIL).item(0).getTextContent());
 				user.setType(element.getElementsByTagName(Constant.USER_TYPE).item(0).getTextContent());
-				user.setContact(Integer.parseInt(element.getElementsByTagName(Constant.USER_CONTACT).item(0).getTextContent()));
+				user.setContact(
+						Integer.parseInt(element.getElementsByTagName(Constant.USER_CONTACT).item(0).getTextContent()));
 
 				break;
 			}
 
 		}
-		
-		if(user == null) {
+
+		if (user == null) {
 			throw new NotFoundException();
-		}else {
-			
+		} else {
+
 			return user;
 		}
 	}

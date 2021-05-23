@@ -23,9 +23,9 @@ public class Main {
 		
 //		Item item = db.getItem(2);
 		
-		User user = db.getUser("Tiran", "12345");
+//		User user = db.getUser("Tiran", "12345");
 		
-		System.out.println(user.getUserName());
+//		System.out.println(user.getUserName());
 	}
 
 }
