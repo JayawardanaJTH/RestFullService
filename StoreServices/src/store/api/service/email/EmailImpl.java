@@ -1,6 +1,5 @@
-package store.utill;
+package store.api.service.email;
 
-import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -11,56 +10,18 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.twilio.Twilio;
-import com.twilio.converter.Promoter;
-//import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
+import com.twilio.rest.preview.wireless.Command;
 
-import java.net.URI;
-import java.math.BigDecimal;
-import store.model.Item;
 import store.model.User;
+import store.utill.Common;
+import store.utill.Constant;
 
-public class Main {
-	// Find your Account Sid and Token at twilio.com/console
-	public static final String ACCOUNT_SID = "ACd72fb73389057fb4b8934e5c770f9f44";
-	public static final String AUTH_TOKEN = "376d8317808f35ca9e4e1b0f8d8df7e6";
+public class EmailImpl implements IEmail {
 
-	public static void main(String[] args) {
-		IDatabase db = new DatabaseImpl();
-		User user = new User("Harsha","tiran2323","asdf","Seller", 1234);
-//		db.saveData(Constant.USER_TYPE_ROOT, new User("Harsha","tiran2323","asdf","Seller", 1234));
-//		db.saveData(Constant.ITEM_TYPE_ROOT, new Item("item2", "this is 2", 300.50));
-
-//		ArrayList<User> list = db.getAllData(Constant.USER_TYPE_ROOT);
-//		ArrayList<Item> items = db.getAllData(Constant.ITEM_TYPE_ROOT);
-//		
-//		for(Item item : items) {
-//			
-//			System.out.println(item.getName());
-//		}
-		
-//		Item item = db.getItem(2);
-		
-//		User user = db.getUser("Tiran", "12345");
-		
-//		System.out.println(user.getUserName());
-		
-//		Twilio.init(ACCOUNT_SID, AUTH_TOKEN); 
-//        Message message = Message.creator( 
-//                new com.twilio.type.PhoneNumber("+94769036197"),  
-//                "MG87b2ebde5183a5fc59a3f4ab480e2114", 
-//                "Your payment is successful ")      
-//            .create(); 
-// 
-//        System.out.println(message.getSid()); 
-		
-		/**
-		 * Mail service
-		 */
-		
+	@Override
+	public void sendEmail(User user) {
 		// Recipient's email ID needs to be mentioned.
-        String to = "tiranharsha2323@gmail.com";
+        String to = user.getEmail();
 
         // Sender's email ID needs to be mentioned
         String from = Common.PROPERTIES.getProperty(Constant.PROPERTY_SENDER_EMAIL);
@@ -101,17 +62,15 @@ public class Main {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
+            message.setSubject("Payment is recived");
 
             // Now set the actual message
 //            message.setText("This is actual message");
 
-            // Send the actual HTML message.
             String messageString = "<h2>Payment is successful!</h2><ul><li>User name : "+user.getUserName()+"</li>";
             // Send the actual HTML message.
             message.setContent(messageString,"text/html");
             
-            System.out.println("sending...");
             // Send message
             Transport.send(message);
             System.out.println("Sent message successfully....");
@@ -119,5 +78,6 @@ public class Main {
             mex.printStackTrace();
         }
 
-}
+	}
+
 }

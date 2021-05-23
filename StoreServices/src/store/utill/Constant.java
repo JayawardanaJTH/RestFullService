@@ -3,6 +3,11 @@ package store.utill;
 public class Constant {
 
 	public static final String XML_FILE_NAME = "\\wtpwebapps\\StoreServices\\WEB-INF\\dataSource.xml";
+	
+	public static final String PROPERTY_FILE = "properties.properties";
+	public static final String PROPERTY_SENDER_EMAIL = "senderEmail";
+	public static final String PROPERTY_SENDER_EMAIL_PASSWORD = "emailPassword";
+	
 	public static final String USER_TYPE_ROOT = "users";
 	public static final String ITEM_TYPE_ROOT = "items";
 	public static final String USER_TYPE_NODE = "user";
