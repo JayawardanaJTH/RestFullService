@@ -3,6 +3,7 @@ package store.utill;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.ws.rs.NotFoundException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
@@ -75,7 +76,7 @@ public class DatabaseImpl implements IDatabase {
 
 			} catch (TransformerException e) {
 				e.printStackTrace();
-				return false;
+				throw new NotFoundException();
 			}
 		} else if (type.contentEquals(Constant.ITEM_TYPE_ROOT)) {
 
@@ -120,7 +121,7 @@ public class DatabaseImpl implements IDatabase {
 
 			} catch (TransformerException e) {
 				e.printStackTrace();
-				return false;
+				throw new NotFoundException();
 			}
 		} else {
 
@@ -176,9 +177,10 @@ public class DatabaseImpl implements IDatabase {
 			}
 			return (ArrayList<T>) arrayList;
 		} else {
+			
 		}
 
-		return null;
+		throw new NotFoundException();
 	}
 
 	@Override
@@ -215,25 +217,32 @@ public class DatabaseImpl implements IDatabase {
 		NodeList nodeList = doc.getElementsByTagName(Constant.USER_TYPE_NODE);
 		Element element = null;
 		Node node = null;
-		User user = new User();
+		User user = null;
 
 		for (int value = 0; value < nodeList.getLength(); value++) {
 			element = (Element) nodeList.item(value);
 
 			if (element.getElementsByTagName(Constant.USER_NAME).item(0).getTextContent().trim().contentEquals(username)
 					&& element.getElementsByTagName(Constant.USER_PASSWORD).item(0).getTextContent().trim().contentEquals(password)) {
-
+				
+				user = new User();
 				user.setId(Integer.parseInt(element.getElementsByTagName(Constant.USER_ID).item(0).getTextContent()));
 				user.setUserName(element.getElementsByTagName(Constant.USER_NAME).item(0).getTextContent());
 				user.setEmail(element.getElementsByTagName(Constant.USER_EMAIL).item(0).getTextContent());
-				user.setContact(
-						Integer.parseInt(element.getElementsByTagName(Constant.USER_CONTACT).item(0).getTextContent()));
+				user.setType(element.getElementsByTagName(Constant.USER_TYPE).item(0).getTextContent());
+				user.setContact(Integer.parseInt(element.getElementsByTagName(Constant.USER_CONTACT).item(0).getTextContent()));
 
 				break;
 			}
 
 		}
-		return user;
+		
+		if(user == null) {
+			throw new NotFoundException();
+		}else {
+			
+			return user;
+		}
 	}
 
 }

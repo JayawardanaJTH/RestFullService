@@ -2,6 +2,7 @@ package store.services;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -33,9 +34,8 @@ public class UserService {
 			byte[] bytes = new BASE64Decoder().decodeBuffer(data);
 			decoded = new String(bytes);
 		} catch (Exception ex) {
-			user = new User();
 
-			return user;
+			throw new NotFoundException();
 		}
 
 		String userData[] = decoded.split(":");
