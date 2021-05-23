@@ -10,7 +10,7 @@
 		</user>
 	<user><id>2</id><name>Harsha</name><email>tiran2323</email><contact>1234</contact><password>asdf</password><type>Seller</type></user></users>
 	
-	<items id="1">
+	<items id="2">
 		<item>
 			<id>1</id>
 			<name>Item</name>

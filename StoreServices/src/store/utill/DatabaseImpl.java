@@ -88,6 +88,8 @@ public class DatabaseImpl implements IDatabase {
 				int itemID = Integer.parseInt(nodeAttr.getTextContent());
 				itemID++;
 
+				nodeAttr.setTextContent(Integer.toString(itemID));
+				
 				System.out.println(itemID);
 
 				Element item = doc.createElement(Constant.ITEM_TYPE_NODE);
